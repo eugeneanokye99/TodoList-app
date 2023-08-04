@@ -22,11 +22,12 @@ export default function AllScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: 'gainsboro',
   },
   button: {
   marginLeft: 'auto',
-  marginTop: '100%',
+  marginTop: 500,
   marginRight: 15,
+  position: 'fixed',
   },
 });

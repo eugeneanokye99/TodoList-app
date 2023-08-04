@@ -5,6 +5,7 @@ import { useNavigation, useRouter } from 'expo-router'
 
 export default function AddTodoScreen() {
   const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
 
  const navigation = useNavigation();
 
@@ -15,27 +16,44 @@ export default function AddTodoScreen() {
    headerStyle: {
      backgroundColor: 'blue'
    },
-  headerTintColor: "#fff"
+  headerTintColor: "#fff",
+  title: "Add Task"
  });
 }, []);
 
 const onSubmit = () => {
- console.warn("Button Pressed")
+ console.warn("Title: ", title)
+ console.warn("Description: ", content)
 
  router.push("/(tabs)/all")
  setContent("")
+ setTitle("")
 }
 
 
 
   return (
     <View style={styles.container}>
-    <View style={styles.input}>
+      {/* Add Task */}
+      <View  style={{margin: 20, flexDirection: 'row',}}>
+      <Text style={styles.name}>Title: </Text>
+      <TextInput
+      placeholder='Title'
+      multiline
+      value={title}
+      onChangeText={setTitle}
+      style={{width: '100%'}}
+      />
+    </View>
+
+    <View  style={{margin: 20, flexDirection: 'row',}}>
+      <Text style={styles.name}>Description: </Text>
       <TextInput
       placeholder='What needs to be done?'
       multiline
       value={content}
       onChangeText={setContent}
+      style={{width: '100%'}}
       />
     </View>
 
@@ -48,12 +66,13 @@ const onSubmit = () => {
 
 const styles = StyleSheet.create({
   container: {
-
+    height: "100%",
+ backgroundColor: 'gainsboro'
  
   },
-  input: {
-    margin: 20,
-    outline: 'none'
+  name: {
+    marginTop: 5, 
+    marginRight: 4,
   },
   button: {
     backgroundColor: 'royalblue',
@@ -61,7 +80,7 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     alignItems: 'center',
     width: 100,
-    marginLeft: 200
+    marginLeft: 150
   },
   buttonText: {
     fontSize: 20,
