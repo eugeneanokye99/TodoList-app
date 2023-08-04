@@ -1,10 +1,14 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
-import React, { useLayoutEffect } from 'react'
-import { useNavigation } from 'expo-router'
+import React, { useLayoutEffect, useState } from 'react'
+import { useNavigation, useRouter } from 'expo-router'
 
 
 export default function AddTodoScreen() {
+  const [content, setContent] = useState("");
+
  const navigation = useNavigation();
+
+ const router = useRouter()
 
  useLayoutEffect(() => {
   navigation.setOptions({
@@ -17,37 +21,47 @@ export default function AddTodoScreen() {
 
 const onSubmit = () => {
  console.warn("Button Pressed")
+
+ router.push("/(tabs)/all")
+ setContent("")
 }
 
 
 
   return (
-    <View>
+    <View style={styles.container}>
     <View style={styles.input}>
       <TextInput
       placeholder='What needs to be done?'
       multiline
+      value={content}
+      onChangeText={setContent}
       />
     </View>
 
      <Pressable style={styles.button} onPress={onSubmit} >
-     <Text style={styles.buttonText}>Submit</Text>
+     <Text style={styles.buttonText}>Add</Text>
    </Pressable>
    </View>
   )
 }
 
 const styles = StyleSheet.create({
+  container: {
+
+ 
+  },
   input: {
     margin: 20,
-    backgroundColor: 'gainsboro',
-    borderRadius: 10,
+    outline: 'none'
   },
   button: {
     backgroundColor: 'royalblue',
     padding: 4,
     borderRadius: 999,
-    alignItems: 'center'
+    alignItems: 'center',
+    width: 100,
+    marginLeft: 200
   },
   buttonText: {
     fontSize: 20,
